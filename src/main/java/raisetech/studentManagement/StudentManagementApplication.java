@@ -46,15 +46,12 @@ public class StudentManagementApplication {
 
 package raisetech.studentManagement;
 
+import java.util.List;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
@@ -64,58 +61,26 @@ import org.springframework.web.bind.annotation.RestController;
 public class StudentManagementApplication {
 
   @Autowired
-  private StudentRepository repository;// ★ ここでリポジトリを注入
+  private StudentRepository studentRepository;// ★ ここでリポジトリを注入
+  @Autowired
+  private StudentCourseRepository studentCourseRepository;
 
   public static void main(String[] args) {
     SpringApplication.run(StudentManagementApplication.class, args);
   }
 
-  // 起動確認用（DBもRepositoryも使わない）
-  @GetMapping("/ping")
-  public String ping() {
-    return "pong";
+
+  @GetMapping("/studentList")
+  public List<Students> getStudentList() {
+    return studentRepository.search();
   }
 
-  // DB確認用
-  @GetMapping("/testAny")
-  public String testAny() {
-    try {
-      Student s = repository.selectAny();
-      if (s == null)
-        return "not found";
-      return s.getName() + " " + s.getAge();
-    } catch (Exception e) {
-      e.printStackTrace();
-      Throwable c = (e.getCause() != null) ? e.getCause() : e;
-      return "ERROR(testAny): " + c.getClass().getSimpleName() + " - " + c.getMessage();
-    }
-  }
-
-  @GetMapping("/student")
-  public String getStudent(@RequestParam("name")String name) {
-    Student s = repository.searchByName(name);
-    if (s == null) {
-      return "not found";
-    } else {
-      return s.getName() + " " + s.getAge() + "歳";
-    }
-
-  }
-
-  @PostMapping("/student")
-  public void registerStudent(String name, int age) {
-    repository.registerStudent(name, age);
-
-  }
-
-  @PatchMapping("/student")
-  public void updateStudent(String name, int age){
-    repository.updateStudent(name, age);
-  }
-
-  @DeleteMapping("/student")
-  public void deleteStudent(String name){
-    repository.deleteStudent(name);
+  @GetMapping("/studentCourses")
+  public List<StudentCourse> getStudentCourses() {
+    return studentCourseRepository.search();
   }
 }
+
+
+
 
