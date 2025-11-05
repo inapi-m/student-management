@@ -53,6 +53,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import raisetech.studentManagement.data.StudentCourse;
+import raisetech.studentManagement.data.Students;
+import raisetech.studentManagement.repository.StudentCourseRepository;
+import raisetech.studentManagement.repository.StudentRepository;
 
 @SpringBootApplication
 @RestController
@@ -60,25 +64,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 public class StudentManagementApplication {
 
-  @Autowired
-  private StudentRepository studentRepository;// ★ ここでリポジトリを注入
-  @Autowired
-  private StudentCourseRepository studentCourseRepository;
 
   public static void main(String[] args) {
     SpringApplication.run(StudentManagementApplication.class, args);
   }
 
 
-  @GetMapping("/studentList")
-  public List<Students> getStudentList() {
-    return studentRepository.search();
-  }
 
-  @GetMapping("/studentCourses")
-  public List<StudentCourse> getStudentCourses() {
-    return studentCourseRepository.search();
-  }
 }
 
 
