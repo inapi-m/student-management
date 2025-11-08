@@ -1,10 +1,9 @@
-package raisetech.studentManagement.Controller;
+package raisetech.studentManagement.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import raisetech.studentManagement.data.StudentCourse;
 import raisetech.studentManagement.data.Students;
 import raisetech.studentManagement.service.StudentService;
 
