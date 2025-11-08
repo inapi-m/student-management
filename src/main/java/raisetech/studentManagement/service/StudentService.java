@@ -18,8 +18,9 @@ public class StudentService {
     this.studentRepository = repository;
   }
 
-  public List<Students> serchStudentList() {
+  public List<Students> searchStudentList() {
     //検索処理
+
     return studentRepository.search().stream()
         .filter(students -> students.getAge() >= 23)
         .collect(Collectors.toList());

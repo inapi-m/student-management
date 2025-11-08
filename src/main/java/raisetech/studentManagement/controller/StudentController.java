@@ -19,11 +19,11 @@ public class StudentController {
 
 
 
-  @Autowired
+
 
   @GetMapping("/studentList")
   public List<Students> getStudentList() {
-    return studentService.serchStudentList();
+    return studentService.searchStudentList();
   }
 
 
