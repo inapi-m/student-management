@@ -3,7 +3,6 @@ package raisetech.studentManagement.service;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import raisetech.studentManagement.data.StudentCourse;
 import raisetech.studentManagement.repository.StudentCourseRepository;
@@ -13,7 +12,7 @@ public class StudentCourseService {
 
   private StudentCourseRepository studentCourseRepository;
 
-  @Autowired
+
   public StudentCourseService(StudentCourseRepository studentCourseRepository) {
     this.studentCourseRepository = studentCourseRepository;
   }

@@ -1,16 +1,4 @@
-/*package raisetech.studentManagement;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-
-@Mapper
-public interface StudentRepository {
-
-  @Select("SELECT * FROM student WHERE name = #{name}")
-  Student searchByName(@Param("name") String name);
-
-}*/
 package raisetech.studentManagement.repository;
 
 import java.util.List;
@@ -20,7 +8,6 @@ import raisetech.studentManagement.data.Students;
 
 /**
  * 受講生情報を扱うリポジトリ
- *
  * 全件検索や単一条件での検索、コース情報の検索が行えるクラス
  */
 @Mapper
