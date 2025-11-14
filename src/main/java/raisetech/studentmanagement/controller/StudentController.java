@@ -1,10 +1,10 @@
-package raisetech.studentManagement.controller;
+package raisetech.studentmanagement.controller;
 
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import raisetech.studentManagement.data.Students;
-import raisetech.studentManagement.service.StudentService;
+import raisetech.studentmanagement.data.Student;
+import raisetech.studentmanagement.service.StudentService;
 
 @RestController
 public class StudentController {
@@ -17,11 +17,8 @@ public class StudentController {
   }
 
 
-
-
-
   @GetMapping("/studentList")
-  public List<Students> getStudentList() {
+  public List<Student> getStudentList() {
     return studentService.searchStudentList();
   }
 

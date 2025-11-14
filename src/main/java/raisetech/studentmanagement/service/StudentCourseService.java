@@ -1,11 +1,11 @@
-package raisetech.studentManagement.service;
+package raisetech.studentmanagement.service;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
-import raisetech.studentManagement.data.StudentCourse;
-import raisetech.studentManagement.repository.StudentCourseRepository;
+import raisetech.studentmanagement.data.StudentCourse;
+import raisetech.studentmanagement.repository.StudentCourseRepository;
 
 @Service
 public class StudentCourseService {
@@ -22,7 +22,7 @@ public class StudentCourseService {
     //絞り込み検索でJava基礎コースのコース情報のみを抽出
     //抽出したリストをコントローラーに返す
     return studentCourseRepository.search().stream()
-        .filter(studentCourse -> Objects.equals(studentCourse.getCourseName(),"Java基礎コース"))
+        .filter(studentCourse -> Objects.equals(studentCourse.getCourseName(), "Java基礎コース"))
         .collect(Collectors.toList());
 
   }
