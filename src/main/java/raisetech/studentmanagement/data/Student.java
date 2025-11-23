@@ -15,6 +15,8 @@ public class Student {
   private String city;
   private String gender;
   private int age;
+  private String remark;
+  private boolean isDelated;
 
 
 }
