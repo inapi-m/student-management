@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>受講生登録</title>
+</head>
+<body>
+<h1>受講生情報登録</h1>
+<!--@の中はPostのURL-->
+<form th:action="@{/registerStudent}" th:object="${studentDetail}" method="post">
+  <div>
+    <label for="fullName">名前:</label>
+    <input type="text" id="fullName" th:field="*{student.fullName}" required/>
+  </div>
+  <div>
+    <label for="furigana">カナ名:</label>
+    <input type="text" id="furigana" th:field="*{student.furigana}"/>
+  </div>
+  <div>
+    <label for="nickname">ニックネーム:</label>
+    <input type="text" id="nickname" th:field="*{student.nickname}"/>
+  </div>
+  <div>
+    <label for="email">メールアドレス:</label>
+    <input type="email" id="email" th:field="*{student.email}" required/>
+  </div>
+  <div>
+    <label for="city">地域:</label>
+    <input type="text" id="city" th:field="*{student.city}"/>
+  </div>
+  <div>
+    <label for="age">年齢:</label>
+    <input type="number" id="age" th:field="*{student.age}"/>
+  </div>
+  <div>
+    <label for="gender">性別:</label>
+    <input type="text" id="gender" th:field="*{student.gender}"/>
+  </div>
+  <div>
+    <label for="remark">備考:</label>
+    <textarea id="remark" th:field="*{student.remark}"></textarea>
+  </div>
+
+  <hr />
+
+  <!-- コース情報の入力エリア -->
+  <div id="courseList">
+    <div th:each="course, stat : *{studentCourses}" class="course-entry">
+      
+      <h3 th:text="'コース情報 ' + ${stat.count}">コース情報</h3>
+      
+      <div>
+        <label th:for="'courseName-' + ${stat.index}">受講コース名:</label>
+        <input type="text" th:id="'courseName-' + ${stat.index}"
+               th:field="*{studentCourses[__${stat.index}__].courseName}" required/>
+      </div>
+      
+      <div>
+        <label th:for="'startDate-' + ${stat.index}">開始日:</label>
+        <input type="date" th:id="'startDate-' + ${stat.index}" 
+               th:field="*{studentCourses[__${stat.index}__].startDate}"/>
+      </div>
+      
+      <div>
+        <label th:for="'expectedEndDate-' + ${stat.index}">終了予定日:</label>
+        <input type="date" th:id="'expectedEndDate-' + ${stat.index}" 
+               th:field="*{studentCourses[__${stat.index}__].expectedEndDate}"/>
+      </div>
+      <hr />
+    </div>
+  </div>
+
+  <!-- 追加ボタン -->
+  <div>
+    <button type="button" id="addCourseBtn">コース追加</button>
+  </div>
+
+  <div>
+    <button type="submit">登録</button>
+  </div>
+</form>
+
+<script>
+  document.getElementById('addCourseBtn').addEventListener('click', function() {
+    const courseList = document.getElementById('courseList');
+    const courseCount = courseList.querySelectorAll('.course-entry').length;
+    
+    // 新しい入力フィールドのHTMLを作成
+    // name属性のインデックス（studentCourses[X]）を連番で増やすのがポイント
+    const newCourseHtml = `
+      <div class="course-entry">
+        <h3>コース情報 ${courseCount + 1}</h3>
+        <div>
+          <label for="courseName-${courseCount}">コース名:</label>
+          <input type="text" id="courseName-${courseCount}" name="studentCourses[${courseCount}].courseName" required/>
+        </div>
+        <div>
+          <label for="startDate-${courseCount}">開始日:</label>
+          <input type="date" id="startDate-${courseCount}" name="studentCourses[${courseCount}].startDate"/>
+        </div>
+        <div>
+          <label for="expectedEndDate-${courseCount}">終了予定日:</label>
+          <input type="date" id="expectedEndDate-${courseCount}" name="studentCourses[${courseCount}].expectedEndDate"/>
+        </div>
+        <hr />
+      </div>
+    `;
+    
+    // HTMLを追加
+    courseList.insertAdjacentHTML('beforeend', newCourseHtml);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>受講生一覧</title>
+</head>
+<body>
+<h1>受講生一覧</h1>
+  <table border="1">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>名前</th>
+      <th>カナ名</th>
+      <th>ニックネーム</th>
+      <th>メールアドレス</th>
+      <th>地域</th>
+      <th>年齢</th>
+      <th>性別</th>
+      <th>備考</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <!-- studentList は Controller で model に入れたリスト名に合わせる -->
+    <tr th:each="student : ${studentList}">
+      <td th:text="${student.studentId}"></td>
+      <td th:text="${student.fullName}"></td>
+      <td th:text="${student.furigana}"></td>
+      <td th:text="${student.nickname}"></td>
+      <td th:text="${student.email}"></td>
+      <td th:text="${student.city}"></td>
+      <td th:text="${student.age}"></td>
+      <td th:text="${student.gender}"></td>
+      <td th:text="${student.remark}"></td>
+    </tr>
+    </tbody>
+  </table>
+</body>
+</html>
